@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(chmod +x *)",
+      "Bash(rm /Users/shivamgaur/Documents/automation/medium-blog-writer/auto-commit-push.skill)",
+      "Bash(rm -rf /Users/shivamgaur/Documents/automation/medium-blog-writer/scripts/auto-commit-push.sh)",
+      "Bash(bash .claude/skills/auto-commit-push/scripts/auto-commit-push.sh)"
+    ]
+  }
+}

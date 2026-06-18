@@ -5,15 +5,27 @@
 [![Node.js](https://img.shields.io/badge/node-%3E%3D14.0.0-green.svg)](https://nodejs.org/)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-Skill-blue.svg)](https://claude.ai/code)
 
-An automation tool for drafting and publishing blog posts to Medium using Claude Code.
+A collection of Claude Code skills for automating blog workflows: drafting & publishing to Medium, and managing git commits.
 
-## Features
+## 📚 Included Skills
+
+### 1. Medium Story Drafter
+Automate drafting and publishing blog posts to Medium.
 
 - **Automated Draft Creation**: Convert markdown files to Medium drafts automatically
 - **Direct Publishing**: Publish drafts live to Medium with one command
 - **Formatting Support**: Optional automatic heading and code block formatting
 - **Persistent Browser Session**: Maintains login state across sessions (one-time 2FA setup)
 - **Copy-Paste Integration**: Uses macOS clipboard for seamless content transfer
+
+### 2. Auto Commit & Push
+Automate the entire git workflow with intelligent commit message generation.
+
+- **Change Analysis**: Automatically understands what files changed
+- **Smart Commit Messages**: Generates meaningful commits based on changes
+- **Bash Integration**: Uses pure bash scripts for all git operations
+- **One-Command Workflow**: Stage, commit, and push in one action
+- **Custom Messages**: Override auto-generated messages when needed
 
 ## About This Project
 
@@ -43,27 +55,78 @@ npm install -g @anthropic-ai/claude-code
 
 ## Usage
 
-### Draft a Story
+### Medium Story Drafter
+
+#### Draft a Story
 ```bash
-medium-story-drafter --file your-article.md
+/medium-story-drafter --file your-article.md
 ```
 
-### Publish a Story
+#### Publish a Story
 ```bash
-medium-story-drafter --file your-article.md --publish
+/medium-story-drafter --file your-article.md --publish
 ```
 
-### With Style Fixes
+#### With Style Fixes
 ```bash
-medium-story-drafter --file your-article.md --fix-styles
+/medium-story-drafter --file your-article.md --fix-styles
 ```
 
-### Publish with Formatting
+#### Publish with Formatting
 ```bash
-medium-story-drafter --file your-article.md --publish --fix-styles
+/medium-story-drafter --file your-article.md --publish --fix-styles
 ```
 
-## Markdown Format
+### Auto Commit & Push
+
+Automate your entire git workflow in one command:
+
+#### Auto-Generate Commit Message
+```bash
+/auto-commit-push
+```
+
+#### With Custom Message
+```bash
+/auto-commit-push --message "Fix authentication bug"
+```
+
+#### Or Run Bash Script Directly
+```bash
+bash .claude/skills/auto-commit-push/scripts/auto-commit-push.sh
+bash .claude/skills/auto-commit-push/scripts/auto-commit-push.sh --message "Your message"
+```
+
+**How it works:**
+1. Analyzes git changes (added, modified, deleted files)
+2. Generates intelligent commit message
+3. Stages all changes with `git add .`
+4. Commits using bash script
+5. Pushes to remote branch with tracking
+
+## Project Structure
+
+```
+medium-blog-writer/
+├── .claude/
+│   └── skills/
+│       ├── medium-story-drafter/
+│       │   ├── SKILL.md
+│       │   ├── scripts/
+│       │   └── references/
+│       └── auto-commit-push/
+│           ├── SKILL.md            # Auto-commit-push skill definition
+│           ├── scripts/
+│           │   └── auto-commit-push.sh    # Bash implementation
+│           └── references/
+│               └── git-bash-implementation.md
+├── README.md                       # This file
+├── CLAUDE.md                       # Development documentation
+├── AUTO_COMMIT_PUSH.md             # Detailed auto-commit-push guide
+└── Blog.md                         # Example blog post
+```
+
+## Markdown Format (for Medium)
 
 Create a markdown file with the following structure:
 
@@ -90,14 +153,45 @@ Content for section 2...
 
 ## Running with Claude Code
 
-You can use this skill directly in Claude Code:
+These are Claude Code skills that integrate directly into your workflow:
 
-1. In Claude Code, use the skill command:
-   ```
-   /medium-story-drafter --file your-article.md
-   ```
+### Medium Story Drafter
+```bash
+/medium-story-drafter --file your-article.md
+/medium-story-drafter --file your-article.md --publish
+```
 
-2. Claude Code will handle browser automation, clipboard management, and Medium integration
+Claude Code will handle:
+- Browser automation with Playwright
+- Clipboard management
+- Medium integration
+- Login session persistence
+
+### Auto Commit & Push
+```bash
+/auto-commit-push
+/auto-commit-push --message "Your custom message"
+```
+
+Claude Code will:
+- Analyze git changes
+- Generate smart commit messages
+- Execute bash scripts for git operations
+- Push to your remote repository
+
+### Standalone Usage
+
+Both skills can also be run directly without Claude Code:
+
+```bash
+# Run auto-commit-push script standalone
+bash scripts/auto-commit-push.sh
+bash scripts/auto-commit-push.sh --message "Custom message"
+
+# Make it executable
+chmod +x scripts/auto-commit-push.sh
+./scripts/auto-commit-push.sh
+```
 
 ## Requirements
 
